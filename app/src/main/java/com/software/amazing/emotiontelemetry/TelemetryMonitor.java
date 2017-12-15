@@ -361,7 +361,7 @@ public class TelemetryMonitor extends AppCompatActivity {
                         lSeries3.appendData(new DataPoint(x3,Double.parseDouble(labvals[1].trim())),false,50);
                         x3++;
 
-                        body_stat = (currSkinTemp - 33) * 6;
+                        body_stat = (currSkinTemp - 28) * 6;
 
 
                     }
@@ -381,13 +381,13 @@ public class TelemetryMonitor extends AppCompatActivity {
 
                 if(progVal.intValue() >= 50 && progVal.intValue() <= 60){
                     emotion.setTopTitle("Emotion Detected");
-                    emotion.setCenterTitle("Normal");
+                    emotion.setCenterTitle("Neutral");
                 }
                 else if(progVal.intValue() >= 60 && progVal.intValue() <= 100){
                     emotion.setTopTitle("Emotion Detected");
                     emotion.setCenterTitle("Excited.");
                 }
-                else if(progVal.intValue() <= 55 && progVal.intValue() >= 35){
+                else if(progVal.intValue() <= 45 && progVal.intValue() >= 35){
                     //.setTopTitle(".");
                     emotion.setTopTitle("Emotion Detected");
                     emotion.setCenterTitle("Depressed.");
