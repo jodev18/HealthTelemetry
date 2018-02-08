@@ -66,6 +66,9 @@ public class TelemetryMonitor extends AppCompatActivity {
     private List<Double> ENV_TEMP = new ArrayList<>();
     private List<Double> SKIN_TEMP = new ArrayList<>();
 
+    //FUTURE
+    private List<Double> CONDUCTIVITY_VARS = new ArrayList<>();
+
     int buffCount = 0;
     StringBuilder bfff = new StringBuilder();
 
@@ -88,12 +91,15 @@ public class TelemetryMonitor extends AppCompatActivity {
     }
 
     private void initializeGraphViews(){
+
         gv1.setTitle("Pulse Rate");
         gv1.setTitleTextSize(40.0f);
         gv1.addSeries(lSeries1);
+
         gv2.setTitle("Env. Temperature");
         gv2.setTitleTextSize(40.0f);
         gv2.addSeries(lSeries2);
+
         gv3.setTitle("Skin. Temperature");
         gv3.setTitleTextSize(40.0f);
         gv3.addSeries(lSeries3);

@@ -1,4 +1,4 @@
-package com.software.amazing.emotiontelemetry;
+package com.software.amazing.emotiontelemetry.core;
 
 import android.app.Application;
 import android.content.Context;
