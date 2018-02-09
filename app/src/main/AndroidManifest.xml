@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.software.amazing.emotiontelemetry">
 
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
 
     <application
         android:name=".core.EmotionTelemetryApplication"
@@ -25,7 +32,8 @@
         <activity android:name=".RecordEmotionDataActivity" />
         <activity android:name=".RespondentRegistrationActivity" />
         <activity android:name=".RespondentLoginActivity" />
-        <activity android:name=".EmotionTelemetry"></activity>
+        <activity android:name=".EmotionTelemetrySplash" />
+        <activity android:name=".EmotionTelemetryMain"></activity>
     </application>
 
 </manifest>
