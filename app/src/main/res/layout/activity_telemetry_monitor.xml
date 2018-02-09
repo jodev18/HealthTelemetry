@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.software.amazing.emotiontelemetry.TelemetryMonitor"
-    android:padding="12dp">
+    android:background="@color/colorAccent"
+    android:padding="12dp"
+    tools:context="com.software.amazing.emotiontelemetry.TelemetryMonitor">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,14 +43,14 @@
                     app:wlv_titleCenterStrokeWidth="3dp"
                     app:wlv_triangle_direction="north"
                     app:wlv_waveAmplitude="70"
-                    app:wlv_waveColor="@color/colorAccent" />
+                    app:wlv_waveColor="@color/colorPrimaryDark" />
             </RelativeLayout>
 
 
             <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph1"
                 android:layout_width="match_parent"
-                android:layout_height="200dip"
-                android:id="@+id/graph1" />
+                android:layout_height="200dip" />
 
             <TextView
                 android:id="@+id/tvAverageBPM"
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="Average BPM"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -66,13 +68,14 @@
                 android:layout_height="wrap_content"
                 android:text="Current BPM"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph2"
                 android:layout_width="match_parent"
-                android:layout_height="200dip"
-                android:id="@+id/graph2" />
+                android:layout_height="200dip" />
 
             <TextView
                 android:id="@+id/tvAveEnvTemp"
@@ -93,9 +96,9 @@
                 android:textStyle="bold" />
 
             <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph3"
                 android:layout_width="wrap_content"
-                android:layout_height="200dip"
-                android:id="@+id/graph3" />
+                android:layout_height="200dip" />
 
             <TextView
                 android:id="@+id/tvAveSkinTemp"
@@ -105,6 +108,7 @@
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvCurrSkinTemp"
                 android:layout_width="match_parent"

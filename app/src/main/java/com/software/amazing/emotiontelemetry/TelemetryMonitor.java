@@ -4,39 +4,39 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devpaul.bluetoothutillib.SimpleBluetooth;
-import com.devpaul.bluetoothutillib.utils.SimpleBluetoothListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.software.amazing.emotiontelemetry.bluetooth.BlunoLibrary;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.dmoral.toasty.Toasty;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-public class TelemetryMonitor extends AppCompatActivity {
+public class TelemetryMonitor extends BlunoLibrary {
 
-    private SimpleBluetooth simpleBluetooth;
     private Handler h;
     private StringBuilder sb;
     private ProgressDialog prg;
+
+    private AlertDialog notify;
 
     public static final String DEVICE_MAC = "20:16:07:26:17:50";
 
@@ -80,6 +80,11 @@ public class TelemetryMonitor extends AppCompatActivity {
         setContentView(R.layout.activity_telemetry_monitor);
         setTitle("Emotion Telemetry");
 
+        onCreateProcess();														//onCreate Process by BlunoLibrary
+
+
+        serialBegin(115200);
+
         ButterKnife.bind(this);
 
         initialCheck();
@@ -88,6 +93,7 @@ public class TelemetryMonitor extends AppCompatActivity {
     private void initialCheck(){
         //showSelectGenderDialog();
         begin();
+        buttonScanOnClickProcess();
     }
 
     private void initializeGraphViews(){
@@ -128,7 +134,7 @@ public class TelemetryMonitor extends AppCompatActivity {
         });
 
         enableBluetooth();
-        initializeBluetooth();
+//        initializeBluetooth();
         initializeGraphViews();
 
     }
@@ -145,7 +151,7 @@ public class TelemetryMonitor extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 selectedGender = gender[i];
 
-                Toasty.info(TelemetryMonitor.this,"Selected gender: " + selectedGender,Toast.LENGTH_LONG).show();
+//                Toasty.info(TelemetryMonitor.this,"Selected gender: " + selectedGender,Toast.LENGTH_LONG).show();
                 dialogInterface.dismiss();
             }
         });
@@ -164,118 +170,39 @@ public class TelemetryMonitor extends AppCompatActivity {
         }
     }
 
-    private void initializeBluetooth(){
+    private void tempHandleData(String data){
 
-        simpleBluetooth = new SimpleBluetooth(getApplicationContext(),TelemetryMonitor.this);
-        simpleBluetooth.getBluetoothUtility().enableBluetooth();
-
-        simpleBluetooth.setSimpleBluetoothListener(new SimpleBluetoothListener() {
-            @Override
-            public void onBluetoothDataReceived(byte[] bytes, String data) {
-                super.onBluetoothDataReceived(bytes, data);
-
-                if(buffCount < 5){
-                    bfff.append(data);
-                    buffCount++;
-                }
-                else{
-                    buffCount = 0;
-                    processInput(bfff.toString());
-                    bfff = new StringBuilder();
+        if(!data.contains("N")){
+            if(notify != null){
+                if(notify.isShowing()){
+                    notify.dismiss();
                 }
             }
-
-            @Override
-            public void onDeviceConnected(BluetoothDevice device) {
-                super.onDeviceConnected(device);
-
-                if(prg != null){
-                    if(prg.isShowing()){
-                        prg.dismiss();
-                    }
-                }
-
-                Snackbar.make(gv1,"Connected to device.",Snackbar.LENGTH_SHORT).show();
+            if(buffCount < 5){
+                bfff.append(data);
+                buffCount++;
             }
-
-            @Override
-            public void onDeviceDisconnected(BluetoothDevice device) {
-                super.onDeviceDisconnected(device);
-
-                //Toast.makeText(TelemetryMonitor.this, "Reconnecting...", Toast.LENGTH_SHORT).show();
-
-                //prg.setMessage("Reconnecting within 20 seconds...");
-               h.post(new Runnable() {
-                   @Override
-                   public void run() {
-                        prg.show();
-                   }
-               }) ;
-                h.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        prg.setMessage("Reconnecting within " + Integer.valueOf(secondsWait).toString()
-                                            + " seconds...");
-
-                        secondsWait--;
-
-                        if(secondsWait == 0){
-                            prg.setMessage("Reconnecting...");
-                            simpleBluetooth.connectToBluetoothDevice(DEVICE_MAC);
-                        }
-                        else{
-                            h.postDelayed(this,1000);
-                        }
-                    }
-                });
-
+            else{
+                buffCount = 0;
+                processInput(bfff.toString());
+                bfff = new StringBuilder();
             }
-
-            @Override
-            public void onDiscoveryStarted() {
-                super.onDiscoveryStarted();
-            }
-
-            @Override
-            public void onDiscoveryFinished() {
-                super.onDiscoveryFinished();
-            }
-
-            @Override
-            public void onDevicePaired(BluetoothDevice device) {
-                super.onDevicePaired(device);
-
-                Toast.makeText(TelemetryMonitor.this,
-                        "Device paired to " + device.getName(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDeviceUnpaired(BluetoothDevice device) {
-                super.onDeviceUnpaired(device);
-
-            }
-        });
-
-        //simpleBluetooth.initializeSimpleBluetooth();
-
-        if(simpleBluetooth.initializeSimpleBluetooth()){
-            //add some delay
-            h.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    simpleBluetooth.connectToBluetoothDevice(DEVICE_MAC);
-                }
-            },2000);
         }
         else{
-            Toasty.error(TelemetryMonitor.this,
-                    "Failed to connect to the device.",Toast.LENGTH_LONG).show();
+            if(notify == null){
+                AlertDialog.Builder notif = new AlertDialog.Builder(TelemetryMonitor.this);
+                notif.setTitle("Sensor removed");
+                notif.setMessage("Please keep the sensor intact to continue sensing.");
+                notif.setCancelable(false);
+                notify = notif.create();
+
+
+            }
+            notify.show();
         }
 
-
-
     }
+
 
     private void processInput(String data){
 
@@ -379,7 +306,7 @@ public class TelemetryMonitor extends AppCompatActivity {
                     }
                 }
 
-                Double progVal = body_stat + env_stat + pulse_stat;
+                Double progVal = (body_stat + pulse_stat) - (env_stat/ 2) ;
 
                 Log.d("STAT",progVal.toString());
 
@@ -434,9 +361,70 @@ public class TelemetryMonitor extends AppCompatActivity {
         return bd.doubleValue();
     }
 
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        simpleBluetooth.endSimpleBluetooth();
+    protected void onResume(){
+        super.onResume();
+        System.out.println("BlUNOActivity onResume");
+        onResumeProcess();														//onResume Process by BlunoLibrary
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onPauseProcess();														//onPause Process by BlunoLibrary
+    }
+
+    protected void onStop() {
+        super.onStop();
+        onStopProcess();														//onStop Process by BlunoLibrary
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        onDestroyProcess();														//onDestroy Process by BlunoLibrary
+    }
+
+    @Override
+    public void onConectionStateChange(connectionStateEnum theConnectionState) {//Once connection state changes, this function will be called
+        switch (theConnectionState) {											//Four connection state
+            case isConnected:
+//                buttonScan.setText("Connected");
+                break;
+            case isConnecting:
+//                buttonScan.setText("Connecting");
+                break;
+            case isToScan:
+//                buttonScan.setText("Scan");
+                break;
+            case isScanning:
+//                buttonScan.setText("Scanning");
+                break;
+            case isDisconnecting:
+//                buttonScan.setText("isDisconnecting");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onSerialReceived(String theString) {							//Once connection data received, this function will be called
+        // TODO Auto-generated method stub
+        tempHandleData(theString);						//append the text into the EditText
+        //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
+    }
+
+//    @Override
+//    public void onDestroy(){
+//        super.onDestroy();
+////        simpleBluetooth.endSimpleBluetooth();
+//    }
 }

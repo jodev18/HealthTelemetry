@@ -22,18 +22,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TelemetryMonitor">
+
+        </activity>
+        <activity android:name=".AddRespondent" />
+        <activity android:name=".RecordEmotionDataActivity" />
+        <activity android:name=".EmotionTelemetryMainActivity" />
+        <activity android:name=".EmotionTelemetrySplash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddRespondent" />
-        <activity android:name=".RecordEmotionDataActivity" />
-        <activity android:name=".RespondentRegistrationActivity" />
-        <activity android:name=".RespondentLoginActivity" />
-        <activity android:name=".EmotionTelemetrySplash" />
         <activity android:name=".EmotionTelemetryMain"></activity>
+        <service android:name=".bluetooth.BluetoothLeService" android:enabled="true"/>
     </application>
 
 </manifest>
