@@ -316,9 +316,9 @@ public class TelemetryMonitor extends BlunoLibrary {
                     emotion.setTopTitle("Emotion Detected");
                     emotion.setCenterTitle("Neutral");
                 }
-                else if(progVal.intValue() >= 60 && progVal.intValue() <= 100){
+                else if(progVal.intValue() >= 60 && progVal.intValue() <= 150){
                     emotion.setTopTitle("Emotion Detected");
-                    emotion.setCenterTitle("Excited.");
+                    emotion.setCenterTitle("Excited/Nervous.");
                 }
                 else if(progVal.intValue() <= 45 && progVal.intValue() >= 35){
                     //.setTopTitle(".");
@@ -326,7 +326,7 @@ public class TelemetryMonitor extends BlunoLibrary {
                     emotion.setCenterTitle("Depressed.");
                 }
                 else{
-                    if(progVal > 100){
+                    if(progVal > 150){
                         emotion.setTopTitle("--");
                         emotion.setCenterTitle("--");
                     }
@@ -335,8 +335,6 @@ public class TelemetryMonitor extends BlunoLibrary {
                         emotion.setCenterTitle("--");
                     }
                 }
-
-
             }
 
         }

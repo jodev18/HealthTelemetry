@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.software.amazing.emotiontelemetry">
 
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -10,8 +12,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-
 
     <application
         android:name=".core.EmotionTelemetryApplication"
@@ -21,21 +21,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TelemetryMonitor">
-
-        </activity>
+        <activity android:name=".TelemetryMonitor"></activity>
         <activity android:name=".AddRespondent" />
         <activity android:name=".RecordEmotionDataActivity" />
         <activity android:name=".EmotionTelemetryMainActivity" />
-        <activity android:name=".EmotionTelemetrySplash" >
+        <activity android:name=".EmotionTelemetrySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EmotionTelemetryMain"></activity>
-        <service android:name=".bluetooth.BluetoothLeService" android:enabled="true"/>
+        <activity android:name=".EmotionTelemetryMain" />
+
+        <service
+            android:name=".bluetooth.BluetoothLeService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".Emotions"
+            android:label="@string/title_activity_emotions"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
