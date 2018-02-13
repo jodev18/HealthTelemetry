@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.software.amazing.emotiontelemetry.Emotions;
-
 /**
  * Created by myxroft on 07/10/2017.
  *
@@ -61,10 +59,13 @@ public class DataSetDB extends SQLiteOpenHelper{
 
         public static final String ID = "_id";
 
+        public static final String SESSION_DATE = "sess_date";
+
         public static final String USER_ID = "sess_user_id";
 
         public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME
                 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + SESSION_DATE + " TEXT,"
                 + USER_ID + " INTEGER);";
 
     }

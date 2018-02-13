@@ -23,17 +23,17 @@ public class LoginManager extends DataSetDB {
     public LoginManager(Context ct, int status) {
         super(ct);
 
-        switch (status){
-            case READ:
-                this.sq = getReadableDatabase();
-                break;
-            case WRITE:
-                this.sq = getWritableDatabase();
-                break;
-            default:
-                this.sq = getReadableDatabase();
-        }
-
+//        switch (status){
+//            case READ:
+//                this.sq = getReadableDatabase();
+//                break;
+//            case WRITE:
+//                this.sq = getWritableDatabase();
+//                break;
+//            default:
+//                this.sq = getReadableDatabase();
+//        }
+        this.sq = getWritableDatabase();
         this.cv = new ContentValues();
     }
 
@@ -57,4 +57,32 @@ public class LoginManager extends DataSetDB {
             return 0; //
         }
     }
+
+    public String doLogin(LoginObject loginObject){
+
+        String query = "SELECT " + Login.RESPONDENT_ID + " FROM "  + Login.TABLE_NAME + " WHERE "
+                + Login.USERNAME + "='" + loginObject.USERNAME + "' AND " + Login.PASSWORD +
+                "='" + loginObject.PASSWORD + "'";
+
+        this.c = this.sq.rawQuery(query,null);
+
+        if(this.c.getCount() > 0){
+            String loginID = "";
+            while(c.moveToNext()){
+                loginID = c.getString(c.getColumnIndex(Login.RESPONDENT_ID));
+            }
+            return loginID;
+        }
+        else{
+            return "";
+        }
+
+    }
+//    public long initLogin(LoginObject login){
+//
+//        this.cv.clear();
+//
+//        this.c = this.sq.rawQuery("SELECT * FROM " + Login.TABLE_NAME + " where "
+//                + Login.USERNAME + "='" + login.USERNAME + "' AND " + Login.PASSWORD + "='" + p, null);
+//    }
 }

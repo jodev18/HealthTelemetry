@@ -25,17 +25,18 @@ public class RespondentManager extends DataSetDB {
     public RespondentManager(Context ct, int status) {
         super(ct);
 
-        switch (status){
-            case READ:
-                this.sq = getReadableDatabase();
-                break;
-            case WRITE:
-                this.sq = getWritableDatabase();
-                break;
-            default:
-                this.sq = getReadableDatabase();
-        }
+//        switch (status){
+//            case READ:
+//                this.sq = getReadableDatabase();
+//                break;
+//            case WRITE:
+//                this.sq = getWritableDatabase();
+//                break;
+//            default:
+//                this.sq = getReadableDatabase();
+//        }
 
+        this.sq = getWritableDatabase();
         this.cv = new ContentValues();
     }
 
@@ -54,26 +55,28 @@ public class RespondentManager extends DataSetDB {
 
     public long insertResponent(Respondent respondent){
 
-        if(currstat > 0){
-            if(currstat == WRITE){
+//        if(currstat > 0){
+//            if(currstat == WRITE){
+//
+//
+//            }
+//            else{
+//                throw new IllegalArgumentException("Set to write before inserting!");
+//            }
+//        }
+//        else{
+//            throw new IllegalArgumentException("Set to write before inserting!");
+//        }
 
-                this.cv.clear();
+        this.cv.clear();
 
-                this.cv.put(Respondents.NAME,respondent.NAME);
-                this.cv.put(Respondents.GENDER, respondent.GENDER);
-                this.cv.put(Respondents.AGE, respondent.AGE);
+        this.cv.put(Respondents.NAME,respondent.NAME);
+        this.cv.put(Respondents.GENDER, respondent.GENDER);
+        this.cv.put(Respondents.AGE, respondent.AGE);
 
-                long insertStat = this.sq.insert(Respondents.TABLE_NAME,Respondents.ID,this.cv);
+        long insertStat = this.sq.insert(Respondents.TABLE_NAME,Respondents.ID,this.cv);
 
-                return insertStat;
-            }
-            else{
-                throw new IllegalArgumentException("Set to write before inserting!");
-            }
-        }
-        else{
-            throw new IllegalArgumentException("Set to write before inserting!");
-        }
+        return insertStat;
     }
 
 

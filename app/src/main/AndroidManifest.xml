@@ -21,8 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TelemetryMonitor"></activity>
-        <activity android:name=".AddRespondent" />
+        <activity android:name=".TelemetryMonitor" />
+        <activity android:name=".RespondentRegistrationActivity" />
         <activity android:name=".RecordEmotionDataActivity" />
         <activity android:name=".EmotionTelemetryMainActivity" />
         <activity android:name=".EmotionTelemetrySplash">
@@ -39,8 +39,12 @@
             android:enabled="true" />
 
         <activity
-            android:name=".Emotions"
+            android:name=".EmotionsActivity"
             android:label="@string/title_activity_emotions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetectionRecords"
+            android:label="@string/title_activity_detection_records"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

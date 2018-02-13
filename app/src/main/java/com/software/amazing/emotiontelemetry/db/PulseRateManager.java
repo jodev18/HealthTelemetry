@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.software.amazing.emotiontelemetry.objects.PulseRateObject;
+
 /**
  * Created by myxroft on 10/02/2018.
  */
@@ -33,5 +35,9 @@ public class PulseRateManager extends DataSetDB {
         }
 
         this.cv = new ContentValues();
+    }
+
+    public long insertPulseRate(PulseRateObject pObj){
+
     }
 }

@@ -144,6 +144,7 @@ public abstract class BlunoLibrary  extends Activity{
 						{
 							mConnectionState=connectionStateEnum.isToScan;
 							onConectionStateChange(mConnectionState);
+
 						}
 						else{
 

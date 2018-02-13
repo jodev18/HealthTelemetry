@@ -21,17 +21,26 @@ public class EmotionManager extends DataSetDB {
     public EmotionManager(Context ct, int status) {
         super(ct);
 
-        switch (status){
-            case READ:
-                this.sq = getReadableDatabase();
-                break;
-            case WRITE:
-                this.sq = getWritableDatabase();
-                break;
-            default:
-                this.sq = getReadableDatabase();
-        }
+//        switch (status){
+//            case READ:
+//                this.sq = getReadableDatabase();
+//                break;
+//            case WRITE:
+//                this.sq = getWritableDatabase();
+//                break;
+//            default:
+//                this.sq = getReadableDatabase();
+//        }
+
+        this.sq = getWritableDatabase();
 
         this.cv = new ContentValues();
     }
+
+//    public long insertEmotion(Emotion emote){
+//
+//        this.cv.clear();
+//
+//        this.cv.put(Emotion.EMOTION_NAME, e)
+//    }
 }

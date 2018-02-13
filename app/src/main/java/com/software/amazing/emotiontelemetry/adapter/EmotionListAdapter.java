@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.software.amazing.emotiontelemetry.Emotions;
 import com.software.amazing.emotiontelemetry.R;
 import com.software.amazing.emotiontelemetry.objects.Emotion;
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:padding="12dp"
-    tools:context="com.software.amazing.emotiontelemetry.AddRespondent">
+    tools:context="com.software.amazing.emotiontelemetry.RespondentRegistrationActivity">
 
     <ScrollView
         android:layout_width="match_parent"

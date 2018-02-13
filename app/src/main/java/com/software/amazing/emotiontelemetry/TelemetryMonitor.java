@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
 public class TelemetryMonitor extends BlunoLibrary {
@@ -38,7 +39,6 @@ public class TelemetryMonitor extends BlunoLibrary {
 
     private AlertDialog notify;
 
-    public static final String DEVICE_MAC = "20:16:07:26:17:50";
 
     @BindView(R.id.graph1) GraphView gv1;
     @BindView(R.id.graph2) GraphView gv2;
@@ -73,22 +73,42 @@ public class TelemetryMonitor extends BlunoLibrary {
     StringBuilder bfff = new StringBuilder();
 
     private String selectedGender = "";
+    private String selectedEmotion = "";
+    private String selectedGoal = "";
 
+    private String userID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telemetry_monitor);
         setTitle("Emotion Telemetry");
 
+        h = new Handler(this.getMainLooper());
+
         onCreateProcess();														//onCreate Process by BlunoLibrary
 
+        String goal = this.getIntent().getStringExtra("GOAL");
+
+        if(goal != null){
+            if(goal.length() > 0){
+                if(goal.equals("RECOGNITION")){
+                    initLearn();
+                }
+                else if(goal.equals("RECORDING")){
+
+                }
+            }
+        }
 
         serialBegin(115200);
 
         ButterKnife.bind(this);
 
         initialCheck();
+
     }
+
+    private void initRecord(){}
 
     private void initialCheck(){
         //showSelectGenderDialog();
@@ -318,12 +338,12 @@ public class TelemetryMonitor extends BlunoLibrary {
                 }
                 else if(progVal.intValue() >= 60 && progVal.intValue() <= 150){
                     emotion.setTopTitle("Emotion Detected");
-                    emotion.setCenterTitle("Excited/Nervous.");
+                    emotion.setCenterTitle("Happy");
                 }
                 else if(progVal.intValue() <= 45 && progVal.intValue() >= 35){
                     //.setTopTitle(".");
                     emotion.setTopTitle("Emotion Detected");
-                    emotion.setCenterTitle("Depressed.");
+                    emotion.setCenterTitle("Sad");
                 }
                 else{
                     if(progVal > 150){
@@ -338,6 +358,45 @@ public class TelemetryMonitor extends BlunoLibrary {
             }
 
         }
+    }
+    
+    private void initLearn(){
+
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder ab = new AlertDialog.Builder(TelemetryMonitor.this);
+                
+                ab.setTitle("Gender Select");
+                //ab.setMessage("Please select gender.");
+                
+                String[] gender = {"MALE","FEMALE"};
+                
+                ab.setSingleChoiceItems(gender, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        AlertDialog.Builder ab2 = new AlertDialog.Builder(TelemetryMonitor.this);
+                        ab2.setTitle("Select Emotion");
+
+                        String[] emotions = {"HAPPY","SAD","NERVOUS","INDIFFERENT"};
+
+                        ab2.setSingleChoiceItems(emotions, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                        ab2.create().show();
+
+                        Toast.makeText(TelemetryMonitor.this, "Gender selected", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                
+                ab.create().show();
+            }
+        }, 1000);
     }
 
     private Double getAverage(List<Double> values){
@@ -418,6 +477,7 @@ public class TelemetryMonitor extends BlunoLibrary {
         // TODO Auto-generated method stub
         tempHandleData(theString);						//append the text into the EditText
         //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
+        Log.d("Handle input", theString);
     }
 
 //    @Override

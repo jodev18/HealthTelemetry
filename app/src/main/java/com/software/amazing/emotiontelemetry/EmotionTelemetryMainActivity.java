@@ -29,10 +29,11 @@ public class EmotionTelemetryMainActivity extends AppCompatActivity {
     }
 
     private void initButtonListeners(){
+
         bLearn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                goToLearn();
             }
         });
 
@@ -51,11 +52,20 @@ public class EmotionTelemetryMainActivity extends AppCompatActivity {
         });
     }
 
+    private void goToLearn(){
+        startActivity(new Intent(getApplicationContext(),EmotionTelemetryMain.class));
+    }
+
     private void goToRecognition(){
-        startActivity(new Intent(getApplicationContext(),TelemetryMonitor.class));
+
+        Intent goRecog = new Intent(getApplicationContext(),TelemetryMonitor.class);
+
+        goRecog.putExtra("GOAL","RECOGNITION");
+
+        startActivity(goRecog);
     }
 
     private void goToRegistration(){
-        startActivity(new Intent(getApplicationContext(),AddRespondent.class));
+        startActivity(new Intent(getApplicationContext(),RespondentRegistrationActivity.class));
     }
 }
