@@ -55,19 +55,6 @@ public class RespondentManager extends DataSetDB {
 
     public long insertResponent(Respondent respondent){
 
-//        if(currstat > 0){
-//            if(currstat == WRITE){
-//
-//
-//            }
-//            else{
-//                throw new IllegalArgumentException("Set to write before inserting!");
-//            }
-//        }
-//        else{
-//            throw new IllegalArgumentException("Set to write before inserting!");
-//        }
-
         this.cv.clear();
 
         this.cv.put(Respondents.NAME,respondent.NAME);
@@ -78,6 +65,11 @@ public class RespondentManager extends DataSetDB {
 
         return insertStat;
     }
+
+//    public Respondent getRespondentInformation(String ID){
+//
+//        String q = "SELECT * FROM "
+//    }
 
 
 }

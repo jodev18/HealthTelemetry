@@ -37,7 +37,15 @@ public class PulseRateManager extends DataSetDB {
         this.cv = new ContentValues();
     }
 
-    public long insertPulseRate(PulseRateObject pObj){
-
-    }
+//    public long insertPulseRate(PulseRateObject pObj){
+//
+//        this.cv.clear();
+//
+//        this.cv.put(PulseRate.PULSE_RATE,pObj.PULSE_RATE);
+//        this.cv.put(PulseRate.RESPONDENT_ID,pObj.RESPONDENT_ID);
+//        this.cv.put(PulseRate.SESSION_ID,pObj.SESSION_ID);
+//
+//        long insert
+//
+//    }
 }
