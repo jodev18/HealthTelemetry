@@ -92,10 +92,10 @@ public class TelemetryMonitor extends BlunoLibrary {
         if(goal != null){
             if(goal.length() > 0){
                 if(goal.equals("RECOGNITION")){
-                    initLearn();
+
                 }
                 else if(goal.equals("RECORDING")){
-
+                    initLearn();
                 }
             }
         }
@@ -376,14 +376,19 @@ public class TelemetryMonitor extends BlunoLibrary {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        dialog.dismiss();
+
                         AlertDialog.Builder ab2 = new AlertDialog.Builder(TelemetryMonitor.this);
                         ab2.setTitle("Select Emotion");
 
-                        String[] emotions = {"HAPPY","SAD","NERVOUS","INDIFFERENT"};
+                        final String[] emotions = {"HAPPY","SAD","NEUTRAL"};
 
                         ab2.setSingleChoiceItems(emotions, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
+                                Toast.makeText(TelemetryMonitor.this, "Recording data for emotion: "
+                                        + emotions[which], Toast.LENGTH_SHORT).show();
 
                             }
                         });

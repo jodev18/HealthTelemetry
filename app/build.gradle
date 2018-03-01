@@ -41,4 +41,6 @@ dependencies {
     compile 'me.itangqi.waveloadingview:library:0.3.5'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.karumi:dexter:4.2.0'
+
+    compile 'org.tensorflow:tensorflow-android:+'
 }
