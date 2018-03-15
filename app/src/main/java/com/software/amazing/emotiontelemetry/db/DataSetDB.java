@@ -63,9 +63,15 @@ public class DataSetDB extends SQLiteOpenHelper{
 
         public static final String USER_ID = "sess_user_id";
 
+        public static final String TIMESTAMP = "sess_timestamp";
+
+        public static final String GENDER = "sess_gender";
+
         public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME
                 + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + SESSION_DATE + " TEXT,"
+                + TIMESTAMP + " TEXT,"
+                + GENDER + " TEXT,"
                 + USER_ID + " INTEGER);";
 
     }
@@ -129,6 +135,30 @@ public class DataSetDB extends SQLiteOpenHelper{
                 + PASSWORD + " TEXT);";
     }
 
+    /**
+     * Table to contain the data
+     */
+    protected class EmotionData{
+
+        public static final String TABLE_NAME = "tbl_emotion_data";
+
+        public static final String ID = "_id";
+
+        public static final String EMOTION_VAL = "emotion_value";
+
+        public static final String SESSION_ID = "emotion_sess_id";
+
+        public static final String USER_ID = "emotion_user_id";
+
+        public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME
+                + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + EMOTION_VAL + " TEXT,"
+                + SESSION_ID + " TEXT,"
+                + USER_ID + " TEXT);";
+
+
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -139,6 +169,7 @@ public class DataSetDB extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(Session.TABLE_CREATE);
         sqLiteDatabase.execSQL(Temperatures.TABLE_CREATE);
         sqLiteDatabase.execSQL(Login.TABLE_CREATE);
+        sqLiteDatabase.execSQL(EmotionData.TABLE_CREATE);
 
     }
 

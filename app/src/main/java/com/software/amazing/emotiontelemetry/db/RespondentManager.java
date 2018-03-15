@@ -66,10 +66,31 @@ public class RespondentManager extends DataSetDB {
         return insertStat;
     }
 
-//    public Respondent getRespondentInformation(String ID){
-//
-//        String q = "SELECT * FROM "
-//    }
+
+    public Respondent getRespondentInformation(String ID){
+
+        String q = "SELECT * FROM " + Respondents.TABLE_NAME + " WHERE "
+                + Respondents.ID + "='" + ID + "'";
+
+        this.c = this.sq.rawQuery(q,null);
+
+        if(this.c.getCount() > 0){
+
+            Respondent respondent = new Respondent();
+
+            while(this.c.moveToNext()){
+                respondent.GENDER = this.c.getString(c.getColumnIndex(Respondents.GENDER));
+                respondent.NAME = this.c.getString(c.getColumnIndex(Respondents.NAME));
+                respondent.AGE = this.c.getString(c.getColumnIndex(Respondents.AGE));
+                respondent.ID = this.c.getString(c.getColumnIndex(Respondents.GENDER));
+            }
+
+            return respondent;
+        }
+        else{
+            return null;
+        }
+    }
 
 
 }

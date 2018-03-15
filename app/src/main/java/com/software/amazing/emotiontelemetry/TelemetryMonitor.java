@@ -73,7 +73,7 @@ public class TelemetryMonitor extends BlunoLibrary {
     int buffCount = 0;
     StringBuilder bfff = new StringBuilder();
 
-    //Session variables
+    //SessionObject variables
     private String selectedGender = "";
     private String selectedEmotion = "";
     private String selectedGoal = "";

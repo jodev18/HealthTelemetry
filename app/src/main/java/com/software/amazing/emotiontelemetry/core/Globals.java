@@ -13,4 +13,7 @@ public class Globals {
     public static final String GOAL_LEARN = "GOAL_EMOTION_LEARN";
 
     public static final String PREF_KEY_LOGIN_ID = "PREF_KEY_LOGIN_ID";
+
+    public static final String CONST_MALE = "Male";
+    public static final String CONST_FEMALE = "Female";
 }
