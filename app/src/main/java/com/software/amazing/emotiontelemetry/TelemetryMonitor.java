@@ -72,11 +72,15 @@ public class TelemetryMonitor extends BlunoLibrary {
     int buffCount = 0;
     StringBuilder bfff = new StringBuilder();
 
+    //Session variables
     private String selectedGender = "";
     private String selectedEmotion = "";
     private String selectedGoal = "";
 
+    private String sessID = "";
+
     private String userID = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -426,21 +430,21 @@ public class TelemetryMonitor extends BlunoLibrary {
     protected void onResume(){
         super.onResume();
         System.out.println("BlUNOActivity onResume");
-        onResumeProcess();														//onResume Process by BlunoLibrary
+        onResumeProcess();
     }
 
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
+        onActivityResultProcess(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        onPauseProcess();														//onPause Process by BlunoLibrary
+        onPauseProcess();
     }
 
     protected void onStop() {
@@ -461,7 +465,7 @@ public class TelemetryMonitor extends BlunoLibrary {
 //                buttonScan.setText("Connected");
                 break;
             case isConnecting:
-//                buttonScan.setText("Connecting");
+//                buttonScan.setText("Connecting");a
                 break;
             case isToScan:
 //                buttonScan.setText("Scan");
@@ -482,7 +486,7 @@ public class TelemetryMonitor extends BlunoLibrary {
         // TODO Auto-generated method stub
         tempHandleData(theString);						//append the text into the EditText
         //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
-        Log.d("Handle input", theString);
+        //Log.d("Handle input", theString);
     }
 
 //    @Override
