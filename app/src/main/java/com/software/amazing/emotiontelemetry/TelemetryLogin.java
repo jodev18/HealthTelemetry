@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.software.amazing.emotiontelemetry.core.Globals;
 import com.software.amazing.emotiontelemetry.db.LoginManager;
 import com.software.amazing.emotiontelemetry.objects.LoginObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EmotionTelemetryMain extends AppCompatActivity {
+public class TelemetryLogin extends AppCompatActivity {
 
     @BindView(R.id.etLoginUser) EditText username;
     @BindView(R.id.etLoginPass) EditText pass;
@@ -30,7 +31,6 @@ public class EmotionTelemetryMain extends AppCompatActivity {
         setTitle("Login");
 
         ButterKnife.bind(this);
-
 
         initLogin();
     }
@@ -46,7 +46,7 @@ public class EmotionTelemetryMain extends AppCompatActivity {
 
                 if(userN.length() >= 8){
                    if(userP.length() >= 8){
-                       LoginManager lm = new LoginManager(EmotionTelemetryMain.this,LoginManager.WRITE);
+                       LoginManager lm = new LoginManager(TelemetryLogin.this,LoginManager.WRITE);
 
                        LoginObject loginObject = new LoginObject();
                        loginObject.USERNAME = userN;
@@ -57,11 +57,11 @@ public class EmotionTelemetryMain extends AppCompatActivity {
                        if(loginID.length() > 0){
 
                            SharedPreferences sp = PreferenceManager
-                                   .getDefaultSharedPreferences(EmotionTelemetryMain.this);
+                                   .getDefaultSharedPreferences(TelemetryLogin.this);
 
                            SharedPreferences.Editor e = sp.edit();
 
-                           e.putString("LOGIN_ID",loginID);
+                           e.putString(Globals.PREF_KEY_LOGIN_ID,loginID);
                            e.commit();
 
                            startActivity(new Intent(getApplicationContext(),DetectionRecords.class));

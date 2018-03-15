@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.software.amazing.emotiontelemetry.core.Globals;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -53,19 +55,19 @@ public class EmotionTelemetryMainActivity extends AppCompatActivity {
     }
 
     private void goToLearn(){
-        startActivity(new Intent(getApplicationContext(),EmotionTelemetryMain.class));
+        startActivity(new Intent(getApplicationContext(),TelemetryLogin.class));
     }
 
     private void goToRecognition(){
 
         Intent goRecog = new Intent(getApplicationContext(),TelemetryMonitor.class);
 
-        goRecog.putExtra("GOAL","RECOGNITION");
+        goRecog.putExtra(Globals.INTENT_GOAL_KEY,Globals.GOAL_RECOGNIZE);
 
         startActivity(goRecog);
     }
 
     private void goToRegistration(){
-        startActivity(new Intent(getApplicationContext(),RespondentRegistrationActivity.class));
+        startActivity(new Intent(getApplicationContext(),TelemetrySignup.class));
     }
 }

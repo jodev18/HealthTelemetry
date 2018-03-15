@@ -19,7 +19,7 @@ import com.software.amazing.emotiontelemetry.objects.Respondent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RespondentRegistrationActivity extends AppCompatActivity {
+public class TelemetrySignup extends AppCompatActivity {
 
     @BindView(R.id.etName) EditText eName;
     @BindView(R.id.etAge) EditText eAge;
@@ -65,7 +65,7 @@ public class RespondentRegistrationActivity extends AppCompatActivity {
                 String pass = ePass.getText().toString();
                 
                 RespondentManager rm 
-                        = new RespondentManager(RespondentRegistrationActivity.this,RespondentManager.WRITE);
+                        = new RespondentManager(TelemetrySignup.this,RespondentManager.WRITE);
 
                 Respondent rp = new Respondent();
                 
@@ -75,7 +75,7 @@ public class RespondentRegistrationActivity extends AppCompatActivity {
                 
                 rp.ID = Long.valueOf(rm.insertResponent(rp)).toString();
 
-                LoginManager lm = new LoginManager(RespondentRegistrationActivity.this,LoginManager.WRITE);
+                LoginManager lm = new LoginManager(TelemetrySignup.this,LoginManager.WRITE);
 
                 LoginObject loginObject = new LoginObject();
                 loginObject.RESPONDENT_ID = rp.ID;

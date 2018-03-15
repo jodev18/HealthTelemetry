@@ -20,6 +20,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.software.amazing.emotiontelemetry.bluetooth.BlunoLibrary;
+import com.software.amazing.emotiontelemetry.core.Globals;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -95,10 +96,10 @@ public class TelemetryMonitor extends BlunoLibrary {
 
         if(goal != null){
             if(goal.length() > 0){
-                if(goal.equals("RECOGNITION")){
+                if(goal.equals(Globals.GOAL_RECOGNIZE)){
 
                 }
-                else if(goal.equals("RECORDING")){
+                else if(goal.equals(Globals.GOAL_LEARN)){
                     initLearn();
                 }
             }
@@ -112,7 +113,10 @@ public class TelemetryMonitor extends BlunoLibrary {
 
     }
 
-    private void initRecord(){}
+    //Record telemetry data
+    private void initRecord(){
+
+    }
 
     private void initialCheck(){
         //showSelectGenderDialog();
