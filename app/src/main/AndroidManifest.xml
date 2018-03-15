@@ -24,7 +24,7 @@
         <activity android:name=".TelemetryMonitor" />
         <activity android:name=".TelemetrySignup" />
         <activity android:name=".RecordEmotionDataActivity" />
-        <activity android:name=".EmotionTelemetryMainActivity" />
+        <activity android:name=".TelemetryMain" />
         <activity android:name=".EmotionTelemetrySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +43,7 @@
             android:label="@string/title_activity_emotions"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DetectionRecords"
+            android:name=".TelemetryRecords"
             android:label="@string/title_activity_detection_records"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

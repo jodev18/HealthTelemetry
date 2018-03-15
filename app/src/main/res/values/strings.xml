@@ -13,5 +13,5 @@
     <string name="unknown_characteristic">Unknown characteristic</string>
     <string name="unknown_service">Unknown service</string>
     <string name="title_activity_emotions">Emotions</string>
-    <string name="title_activity_detection_records">DetectionRecords</string>
+    <string name="title_activity_detection_records">Session Records</string>
 </resources>

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.ListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetectionRecords extends AppCompatActivity {
+public class TelemetryRecords extends AppCompatActivity {
 
     @BindView(R.id.lvDetectRecord) ListView lv;
 
@@ -34,7 +33,7 @@ public class DetectionRecords extends AppCompatActivity {
     private void initRecords(){
 
         SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(DetectionRecords.this);
+                .getDefaultSharedPreferences(TelemetryRecords.this);
 
         String userName = sp.getString("LOGIN_ID","");
 

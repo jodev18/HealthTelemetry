@@ -12,7 +12,7 @@ import com.software.amazing.emotiontelemetry.core.Globals;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EmotionTelemetryMainActivity extends AppCompatActivity {
+public class TelemetryMain extends AppCompatActivity {
 
     @BindView(R.id.btnLearn) Button bLearn;
     @BindView(R.id.btnRecognize) Button bRecog;
@@ -55,6 +55,7 @@ public class EmotionTelemetryMainActivity extends AppCompatActivity {
     }
 
     private void goToLearn(){
+
         startActivity(new Intent(getApplicationContext(),TelemetryLogin.class));
     }
 

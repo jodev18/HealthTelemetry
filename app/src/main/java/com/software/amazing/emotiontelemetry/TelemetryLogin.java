@@ -64,7 +64,7 @@ public class TelemetryLogin extends AppCompatActivity {
                            e.putString(Globals.PREF_KEY_LOGIN_ID,loginID);
                            e.commit();
 
-                           startActivity(new Intent(getApplicationContext(),DetectionRecords.class));
+                           startActivity(new Intent(getApplicationContext(),TelemetryRecords.class));
                            finish();
                        }
                        else{

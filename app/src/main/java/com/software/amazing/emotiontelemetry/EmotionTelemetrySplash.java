@@ -45,7 +45,7 @@ public class EmotionTelemetrySplash extends AppCompatActivity {
                             e.putBoolean("has_permission",true);
                             e.commit();
 
-                            startActivity(new Intent(getApplicationContext(),EmotionTelemetryMainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),TelemetryMain.class));
                             finish();
                         }
                         @Override public void onPermissionDenied(PermissionDeniedResponse response) {/* ... */}
@@ -56,7 +56,7 @@ public class EmotionTelemetrySplash extends AppCompatActivity {
             h.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(getApplicationContext(),EmotionTelemetryMainActivity.class));
+                    startActivity(new Intent(getApplicationContext(),TelemetryMain.class));
                     finish();
                 }
             },1200);
